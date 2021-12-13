@@ -1,5 +1,5 @@
 # This program trains a GAN using data with circular distribution
-# Then, generates new synthetic data with same propetries 
+# Then, generates new synthetic data with the same properties 
 # Executed with Python 3.8.5 and TensorFlow 2.1.0; On CPU, it takes 5mins
 # Reference: Google TensorFlow GAN tutorials
 
@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from sklearn.datasets import make_circles
 import time
-start0 = time.time()
 
 def generate_and_plot_data(model, test_input, train_data):
     predictions = model(test_input, training=False)
@@ -93,4 +92,3 @@ def train(dataset, epochs):
 
 # Start training, generating new data, and plotting them as we train
 train(train_data, EPOCHS)
-print ('Total time took {} sec'.format(time.time()-start0))
