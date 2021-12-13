@@ -20,7 +20,7 @@ def generate_and_plot_data(model, test_input, train_data):
     plt.tight_layout()
     plt.show()
 
-# Create Training data distributed as a circle
+# Create training data that is distributed as a circle
 DATA_SIZE = 1000
 x, y = make_circles(n_samples=DATA_SIZE, factor=0.999)
 train_data = x    # Already normalized in the range [-1, 1]
@@ -60,6 +60,7 @@ generator_optimizer = tf.keras.optimizers.Adam(1e-4)
 discriminator_optimizer = tf.keras.optimizers.Adam(1e-4)
 
 EPOCHS = 50000; noise_dim = 2; num_examples_to_generate = 256
+# Same seed is reused to generate data and visualize the progress
 seed = tf.random.normal([num_examples_to_generate, noise_dim])
 
 @tf.function
