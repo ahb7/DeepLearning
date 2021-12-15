@@ -1,6 +1,6 @@
 # This program trains a GAN using data with circular distribution
 # Then, generates new synthetic data with the same properties 
-# Executed with Python 3.8.5 and TensorFlow 2.1.0; On CPU, it takes 5mins
+# Executed with Python 3.7.10 and TensorFlow 2.1.0; On CPU, it takes 5mins
 # Reference: Google TensorFlow GAN tutorials
 
 import tensorflow as tf
