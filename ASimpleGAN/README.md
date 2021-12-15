@@ -1,6 +1,6 @@
 #### Running it:
-This program was executed on Spyder IDE with Python 3.7.10 and TensorFlow 2.1.0. 
-It can be run on command prompt as:
+This program was executed on Spyder IDE with Python 3.7.10 and TensorFlow 2.1.0.  
+It can be run on command prompt as:  
 	python simpleGAN.py
   
   
