@@ -7,23 +7,22 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from sklearn.datasets import make_circles
-import time
 
-def generate_and_plot_data(model, test_input, train_data):
+def generate_and_plot_data(model, test_input, train_data, epoch):
+    plt.close()
     predictions = model(test_input, training=False)
     predictions = 100 * predictions; train_data = 100 * train_data
-    plt.figure()
     generated = plt.scatter(predictions[:,0], predictions[:,1])
     real = plt.scatter(train_data[:,0], train_data[:,1])
     plt.legend((real, generated), ("Training Data","Generated Data"))
-    plt.title('Data Samples Plot')
-    plt.tight_layout()
-    plt.show()
-
+    plt.title('Data Samples Plot After {} Epoch'.format(epoch))
+    plt.show(block=False)
+    plt.pause(0.5)
+    
 # Create training data that is distributed as a circle
 DATA_SIZE = 1000
 x, y = make_circles(n_samples=DATA_SIZE, factor=0.999)
-train_data = x    # Already normalized in the range [-1, 1]
+train_data = tf.cast(x, tf.float32)  # Already normalized in the range [-1, 1]
 
 def generator_model():
     model = tf.keras.Sequential()
@@ -59,7 +58,7 @@ def generator_loss(fake_output):
 generator_optimizer = tf.keras.optimizers.Adam(1e-4)
 discriminator_optimizer = tf.keras.optimizers.Adam(1e-4)
 
-EPOCHS = 50000; noise_dim = 2; num_examples_to_generate = 256
+EPOCHS = 20000; noise_dim = 2; num_examples_to_generate = 256
 # Same seed is reused to generate data and visualize the progress
 seed = tf.random.normal([num_examples_to_generate, noise_dim])
 
@@ -82,14 +81,15 @@ def train_step(real_data):
 
 def train(dataset, epochs):
     for epoch in range(epochs):
-        start = time.time()
         train_step(dataset)
         if epoch%1000 == 0:
+            print ('The epoch {} is done'.format(epoch+1))
             # Generate and plot the generated data as we train
-            generate_and_plot_data(generator, seed, train_data)
-            print ('Time for epoch {} is {} sec'.format(epoch+1, time.time()-start))
+            generate_and_plot_data(generator, seed, train_data, epoch+1)
     # Generate and plot the generated data at the end of the training
-    generate_and_plot_data(generator, seed, train_data)
+    generate_and_plot_data(generator, seed, train_data, epoch+1)
+    print('The GAN training is done')
+    plt.show()
 
 # Start training, generating new data, and plotting them as we train
 train(train_data, EPOCHS)
