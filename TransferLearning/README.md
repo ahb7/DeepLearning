@@ -6,4 +6,4 @@ Please download the flower image datset from:
   http://download.tensorflow.org/example_images/flower_photos.tgz
 
 It can be run on command prompt as:
-  python TransferLearning_AlexNet.py
+  &emsp;python TransferLearning_AlexNet.py
