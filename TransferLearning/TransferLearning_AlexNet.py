@@ -21,7 +21,7 @@ import gc
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 batch_size = 32
 IMAGE_SHAPE = (224, 224)
-data_dir = "flower_photos"
+data_dir = "flower_photos2"
 num_classes = 5
 
 # Load dataset and pre-process them
@@ -101,6 +101,8 @@ optimizer = optim.Adam(alexnet.parameters())
 # Define model training function
 def train(model, criterion, optimizer, epochs):  
     history = []
+    train_size = len(y_train)
+    val_size = len(y_val)
     for epoch in range(epochs):
         # Training
         total_train_loss = 0
@@ -126,9 +128,9 @@ def train(model, criterion, optimizer, epochs):
             optimizer.step()
             
         # Compute accuracy
-        train_acc = 100*((total_train_correct/len(y_train)).item())
+        train_acc = 100*((total_train_correct/train_size).item())
         # Compute average loss
-        train_loss = total_train_loss/len(y_train)
+        train_loss = total_train_loss/train_size
         
         # Validation
         with torch.no_grad():
@@ -150,9 +152,9 @@ def train(model, criterion, optimizer, epochs):
                 total_val_correct += ((y_predicted == labels).sum())
                 
             # Compute accuracy
-            val_acc = 100*((total_val_correct/len(y_val)).item())
+            val_acc = 100*((total_val_correct/val_size).item())
             # Compute average loss
-            val_loss = total_val_loss/len(y_val)
+            val_loss = total_val_loss/val_size
         
         # For each epoch update history
         history.append([train_loss, val_loss, train_acc, val_acc])
