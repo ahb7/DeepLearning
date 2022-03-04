@@ -21,7 +21,7 @@ import gc
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 batch_size = 32
 IMAGE_SHAPE = (224, 224)
-data_dir = "flower_photos2"
+data_dir = "flower_photos"
 num_classes = 5
 
 # Load dataset and pre-process them
