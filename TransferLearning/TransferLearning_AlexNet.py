@@ -2,7 +2,7 @@
 This program is an example of Transfer Learning using PyTorch AlexNet
 It classifies flower images from the following dataset into five classes
 http://download.tensorflow.org/example_images/flower_photos.tgz
-Executed on Spyder IDE with Python 3.8.5 and PyTorch 1.8.1 
+Executed on Google Colab with GPU, with Python 3.7.12 and PyTorch 1.10.0 
 """
 
 import torch
@@ -17,11 +17,15 @@ import cv2
 from sklearn.model_selection import train_test_split
 import gc
 
+# Mount Google Drive 
+from google.colab import drive
+drive.mount('/content/gdrive')
+
 # Initialize variables 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-batch_size = 32
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+batch_size = 164
 IMAGE_SHAPE = (224, 224)
-data_dir = "flower_photos"
+data_dir = "/content/gdrive/My Drive/Data/flower_photos"
 num_classes = 5
 
 # Load dataset and pre-process them
@@ -49,9 +53,9 @@ y = np.array(y)
 X = X/255
 
 # Split data into train and test sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.1)
 # Split again into train and validation sets
-X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25)
+X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.111111)
 
 # Convert dataset from numpy to pytorch tensor
 X_train = torch.from_numpy(X_train)
@@ -81,7 +85,6 @@ train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(test_data, batch_size=batch_size)
 val_loader = DataLoader(val_data, batch_size=batch_size)
 
-
 # Load pretrained AlexNet and modify last layer
 alexnet = models.alexnet(pretrained=True)
 
@@ -93,10 +96,13 @@ for param in alexnet.parameters():
 alexnet.classifier[6] = nn.Linear(4096, num_classes)
 alexnet.classifier.add_module("7", nn.LogSoftmax(dim = 1))
 
+alexnet = alexnet.to(device)
+# print alexnet
+print(alexnet)
+
 # Loss function and optimizer
 criterion  = nn.NLLLoss()
 optimizer = optim.Adam(alexnet.parameters())
-
 
 # Define model training function
 def train(model, criterion, optimizer, epochs):  
@@ -164,14 +170,13 @@ def train(model, criterion, optimizer, epochs):
 
     return model, history
 
-
 # Start training
-num_epochs = 5
+num_epochs = 10
 model, history = train(alexnet, criterion, optimizer, num_epochs)   
 
 # Plot training and validation loss
-history = np.array(history)
-plt.plot(history[:, 0:2])
+new_history = torch.tensor(history, device = 'cpu')
+plt.plot(new_history[:, 0:2])
 plt.legend(["Training", "Validation"])
 plt.xlabel("Epochs")
 plt.ylabel("Loss")
@@ -183,3 +188,4 @@ y_predicted = torch.argmax(outputs, axis=1)
 acc = 100 * ((((y_predicted == y_test).sum())/len(y_test)).item())
 
 print(f"\nThe final model accuracy on the test data = {acc:.3f}%")
+
