@@ -1,7 +1,6 @@
 #### Running it:
 
-This program was executed on Spyder IDE with Python 3.8.5 and PyTorch 1.8.1
-
+This program was Executed on Google Colab with GPU, with Python 3.7.12 and PyTorch 1.10.0  
 Please download the flower image dataset from:  
 http://download.tensorflow.org/example_images/flower_photos.tgz
 
