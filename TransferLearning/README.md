@@ -9,7 +9,8 @@ It can be run on Spyder IDE or on command prompt as:
 
 <br/><br/>
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; The Loss Curve
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; The Loss Curve  
+
 ![plot2](https://user-images.githubusercontent.com/17172345/160234155-e2b5c1bd-a0a5-473b-afea-f19145ae90e8.png)
 
 
