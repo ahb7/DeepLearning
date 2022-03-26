@@ -1,6 +1,6 @@
 #### Running it:
 
-This program was Executed on Google Colab with GPU, with Python 3.7.12 and PyTorch 1.10.0  
+This program was executed on Google Colab with GPU, with Python 3.7.12 and PyTorch 1.10.0  
 Please download the flower image dataset from:  
 http://download.tensorflow.org/example_images/flower_photos.tgz
 
