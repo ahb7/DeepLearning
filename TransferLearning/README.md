@@ -11,3 +11,6 @@ It can be run on Spyder IDE or on command prompt as:
 
 
 ![plot2](https://user-images.githubusercontent.com/17172345/160234155-e2b5c1bd-a0a5-473b-afea-f19145ae90e8.png)
+
+
+#### The final model accuracy on the test data = 80.270%
