@@ -1,5 +1,6 @@
 #### Running it:
-
+This program is an example of Transfer Learning using PyTorch AlexNet.
+It classifies flower images into five classes.
 This program was executed on Google Colab with GPU, with Python 3.7.12 and PyTorch 1.10.0  
 Please download the flower image dataset from:  
 http://download.tensorflow.org/example_images/flower_photos.tgz
