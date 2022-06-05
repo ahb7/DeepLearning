@@ -1,3 +1,6 @@
+This program trains a GAN using data with circular distribution.    
+Then, generates new synthetic data with the same properties.    
+
 #### Running it:
 This program was executed on Spyder IDE with Python 3.7.10 and TensorFlow 2.1.0.  
 It can be run on command prompt as:  
