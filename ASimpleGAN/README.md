@@ -1,5 +1,5 @@
 This program trains a simple Generative Adversarial Network (GAN) using data with circular distribution.    
-Then, generates new synthetic data with the same properties.    
+Then, generates new synthetic data with the same property - circular distribution.    
 
 #### Running it:
 This program was executed on Spyder IDE with Python 3.7.10 and TensorFlow 2.1.0.  
